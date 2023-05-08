@@ -32,10 +32,29 @@ function Product(props) {
     fetchProducts();
   }, [props.apiUrl, props.apiKey, props.apiPassword]);
 
-  const handleDelete = (index) => {
-    const newProducts = [...products];
-    newProducts.splice(index, 1);
-    setProducts(newProducts);
+  const handleDelete = async (index) => {
+    try {
+      const productId = products[index].id;
+      const response = await fetch(`${props.apiUrl}/${productId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Basic ${btoa(
+            `${props.apiKey}:${props.apiPassword}`
+          )}`,
+        },
+      });
+
+      if (response.ok) {
+        const newProducts = [...products];
+        newProducts.splice(index, 1);
+        setProducts(newProducts);
+      } else {
+        console.error("Failed to delete product");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleEdit = (index, newName) => {
@@ -64,41 +83,44 @@ function Product(props) {
   };
 
   const handleAdd = async () => {
-  try {
-    const response = await fetch(props.apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Basic ${btoa(
-          `${props.apiKey}:${props.apiPassword}`
-        )}`,
-      },
-      body: JSON.stringify({
-        name: newCategory,
-        inStock: newInStock,
-        buyPrice: newBuyPrice,
-        sellingPrice: newSellingPrice,
-      }),
-    });
+    try {
+      const response = await fetch(props.apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Basic ${btoa(
+            `${props.apiKey}:${props.apiPassword}`
+          )}`,
+        },
+        body: JSON.stringify({
+          name: newCategory,
+          inStock: newInStock,
+          buyPrice: newBuyPrice,
+          sellingPrice: newSellingPrice,
+        }),
+      });
 
-    const data = await response.json();
-    setProducts([...products, data]);
-    setNewCategory("");
-    setNewInStock("");
-    setNewBuyPrice("");
-    setNewSellingPrice("");
-  } catch (error) {
-    console.error(error);
-  }
-};
+      const data = await response.json();
+      setProducts([...products, data]);
+      setNewCategory("");
+      setNewInStock("");
+      setNewBuyPrice("");
+      setNewSellingPrice("");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  // Filter out duplicate products based on their name
+  const uniqueProducts = Array.from(new Set(products.map((product) => product.name)))
+    .map((name) => products.find((product) => product.name === name));
 
   return (
     <div>
       <div>
         <nav className="navbar">
           <div id="logo_box">
-            <img id="logo" src={Logo} alt="logo" />
+          <img id="logo" src={Logo} alt="logo" />
             <span id="logo_name">Riya Kansal</span>
           </div>
         </nav>
@@ -120,7 +142,7 @@ function Product(props) {
           className="add-category-input"
           type="text"
           placeholder="Yes/No"
-
+          value={newInStock}
           onChange={(event) => setNewInStock(event.target.value)}
         />
         <p>Buy Price</p>
@@ -159,7 +181,7 @@ function Product(props) {
           </tr>
         </thead>
         <tbody>
-          {products.map((product, index) => (
+          {uniqueProducts.map((product, index) => (
             <tr key={product.id}>
               <td>{index + 1}</td>
               <td>
@@ -179,22 +201,34 @@ function Product(props) {
                   product.name
                 )}
               </td>
-              {/* <td>{product.atum_stock_status ? "Yes" : "No"}</td> */}
               <td>{product.stock_quantity}</td>
-              <td>{product.price ? product.price : "Not for sale"}</td>
+              <td>{product.price}</td>
               <td>{product.sale_price}</td>
               <td>
                 {editingIndex === index ? (
                   <div>
-                    <button className="add-category-btn" onClick={() => handleSaveEdit(index)}>Save</button>
+                    <button
+                      className="add-category-btn"
+                      onClick={() => handleSaveEdit(index)}
+                    >
+                      Save
+                    </button>
                     <button onClick={handleCancelEdit}>Cancel</button>
                   </div>
                 ) : (
                   <div>
-                    <button className="add-category-btn" onClick={() => handleStartEdit(index, product.name)}>
+                    <button
+                      className="add-category-btn"
+                      onClick={() => handleStartEdit(index, product.name)}
+                    >
                       Edit
                     </button>
-                    <button className="add-category-btn" onClick={() => handleDelete(index)}>Delete</button>
+                    <button
+                      className="add-category-btn"
+                      onClick={() => handleDelete(index)}
+                    >
+                      Delete
+                    </button>
                   </div>
                 )}
               </td>
