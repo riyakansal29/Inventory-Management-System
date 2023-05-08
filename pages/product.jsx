@@ -163,7 +163,9 @@ function Product(props) {
             <tr key={product.id}>
               <td>{index + 1}</td>
               <td>
-                <img src={product.images} alt="product" />
+                {product.images.length > 0 && (
+                  <img src={product.images[0].src} alt="product" />
+                )}
               </td>
               <td>
                 {editingIndex === index ? (
@@ -177,9 +179,10 @@ function Product(props) {
                   product.name
                 )}
               </td>
-              <td>{product.atum_stock_status ? "Yes" : "No"}</td>
-              <td>{product.buyPrice}</td>
+              {/* <td>{product.atum_stock_status ? "Yes" : "No"}</td> */}
+              <td>{product.stock_quantity}</td>
               <td>{product.price ? product.price : "Not for sale"}</td>
+              <td>{product.sale_price}</td>
               <td>
                 {editingIndex === index ? (
                   <div>

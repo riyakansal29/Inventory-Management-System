@@ -65,3 +65,7 @@ margin-right:0px;
   background-color:red
   ;
 }
+table img {
+  width: 100px; 
+  height: auto; 
+}

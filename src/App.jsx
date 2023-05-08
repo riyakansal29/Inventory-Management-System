@@ -1,6 +1,6 @@
 import React from 'react'
-// import Category from '/components/category.jsx'
-import Product from '/components/product.jsx'
+// import Category from '/pages/category.jsx'
+import Product from '/pages/product.jsx'
 import './App.css'
 const App = () => {
   return (
