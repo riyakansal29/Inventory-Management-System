@@ -1,4 +1,4 @@
-const handleDelete = async (products, setProducts, index) => {
+const handleDelete = async (products, setProducts, index, props) => {
   try {
     const productId = products[index].id;
     const response = await fetch(`${props.apiUrl}/${productId}`, {
@@ -23,11 +23,31 @@ const handleDelete = async (products, setProducts, index) => {
   }
 };
 
+const handleEdit = async (props, products, setProducts, index, newName) => {
+  try {
+    const productId = products[index].id;
+    const response = await fetch(`${props.apiUrl}/${productId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Basic ${btoa(
+          `${props.apiKey}:${props.apiPassword}`
+        )}`,
+      },
+      body: JSON.stringify({ name: newName }),
+    });
 
-const handleEdit = (products, setProducts, index, newName) => {
-  const newProducts = [...products];
-  newProducts[index].name = newName;
-  setProducts(newProducts);
+    if (response.ok) {
+      const updatedProduct = await response.json();
+      const newProducts = [...products];
+      newProducts[index] = updatedProduct;
+      setProducts(newProducts);
+    } else {
+      console.error("Failed to update product");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const handleStartEdit = (setEditingIndex, setEditingValue, index, name) => {
@@ -37,16 +57,28 @@ const handleStartEdit = (setEditingIndex, setEditingValue, index, name) => {
 
 const handleCancelEdit = (setEditingIndex, setEditingValue) => {
   setEditingIndex(-1);
-  setEditingValue('');
+  setEditingValue("");
 };
 
-const handleSaveEdit = (handleEdit, setEditingIndex, setEditingValue, index, editingValue) => {
+const handleSaveEdit = (
+  handleEdit,
+  setEditingIndex,
+  setEditingValue,
+  index,
+  editingValue,
+) => {
   handleEdit(index, editingValue);
   setEditingIndex(-1);
-  setEditingValue('');
+  setEditingValue("");
 };
 
-const handleAdd = async (props, products, setProducts, newCategory, setNewCategory) => {
+const handleAdd = async (
+  props,
+  products,
+  setProducts,
+  newCategory,
+  setNewCategory,
+) => {
   try {
     const response = await fetch(props.apiUrl, {
       method: "POST",
@@ -67,4 +99,11 @@ const handleAdd = async (props, products, setProducts, newCategory, setNewCatego
   }
 };
 
-export { handleDelete, handleEdit, handleStartEdit, handleCancelEdit, handleSaveEdit, handleAdd };
+export {
+  handleDelete,
+  handleEdit,
+  handleStartEdit,
+  handleCancelEdit,
+  handleSaveEdit,
+  handleAdd,
+};

@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
-import Logo from '/assets/logo.png';
-import { handleDelete, handleEdit, handleStartEdit, handleCancelEdit, handleSaveEdit, handleAdd } from '/components/categoryfunc.js';
+import Logo from "/assets/logo.png";
+import {
+  handleDelete,
+  handleEdit,
+  handleStartEdit,
+  handleCancelEdit,
+  handleSaveEdit,
+  handleAdd,
+} from "/components/categoryfunc.js";
 
 function Category(props) {
   const [products, setProducts] = useState([]);
   const [newCategory, setNewCategory] = useState("");
   const [editingIndex, setEditingIndex] = useState(-1);
-  const [editingValue, setEditingValue] = useState('');
+  const [editingValue, setEditingValue] = useState("");
 
   useEffect(() => {
     async function fetchProducts() {
@@ -23,6 +30,7 @@ function Category(props) {
 
         const data = await response.json();
         setProducts(data);
+        console.log(data);
       } catch (error) {
         console.error(error);
       }
@@ -32,11 +40,7 @@ function Category(props) {
   }, [props.apiUrl, props.apiKey, props.apiPassword]);
 
   const handleDeleteWrapper = (index) => {
-    handleDelete(products, setProducts, index);
-  };
-
-  const handleEditWrapper = (index, newName) => {
-    handleEdit(products, setProducts, index, newName);
+    handleDelete(products, setProducts, index, props);
   };
 
   const handleStartEditWrapper = (index, name) => {
@@ -47,8 +51,18 @@ function Category(props) {
     handleCancelEdit(setEditingIndex, setEditingValue);
   };
 
+  const handleEditWrapper = (index, newName) => {
+    handleEdit(props, products, setProducts, index, newName);
+  };
+
   const handleSaveEditWrapper = (index) => {
-    handleSaveEdit(handleEditWrapper, setEditingIndex, setEditingValue, index, editingValue);
+    handleSaveEdit(
+      handleEditWrapper,
+      setEditingIndex,
+      setEditingValue,
+      index,
+      editingValue
+    );
   };
 
   const handleAddWrapper = async () => {
@@ -56,7 +70,7 @@ function Category(props) {
   };
 
   return (
-    <div>    
+    <div>
       <div>
         <nav className="navbar">
           <div id="logo_box">
@@ -94,42 +108,58 @@ function Category(props) {
               <td>
                 {editingIndex === index ? (
                   <div>
-                    <button className="add-category-btn" onClick={() => handleSaveEditWrapper(index)}>
+                    <button
+                      className="add-category-btn"
+                      onClick={() => handleSaveEditWrapper(index)}
+                    >
                       Save
                     </button>
-                    <button className="add-category-btn"  onClick={handleCancelEditWrapper}>Cancel</button>
+                    <button
+                      className="add-category-btn"
+                      onClick={handleCancelEditWrapper}
+                    >
+                      Cancel
+                    </button>
                   </div>
                 ) : (
                   <div>
-                    <button className="add-category-btn" onClick={() => handleStartEditWrapper(index, product.name)}>
+                    <button
+                      className="add-category-btn"
+                      onClick={() =>
+                        handleStartEditWrapper(index, product.name)
+                      }
+                    >
                       Edit
                     </button>
-                    <button className="add-category-btn" onClick={() => handleDeleteWrapper(index)}>
+                    <button
+                      className="add-category-btn"
+                      onClick={() => handleDeleteWrapper(index)}
+                    >
                       Delete
                     </button>
                   </div>
                 )}
               </td>
             </tr>
-                    ))}
-                    </tbody>
-                  </table>
-                  <br />
-                  <div className="addcategory">
-                    <input
-                      className="add-category-input"
-                      type="text"
-                      placeholder="Add Category"
-                      value={newCategory}
-                      onChange={(event) => setNewCategory(event.target.value)}
-                    />
-                    <button className="add-category-btn" onClick={handleAddWrapper}>
-                      Add
-                    </button>
-                  </div>
-                </div>
-              );
-            }
-            
-            export default Category;
-            
+          ))}
+        </tbody>
+      </table>
+      <br />
+      <div className="addcategory">
+        <input
+          className="add-category-input"
+          type="text"
+          placeholder="Add Category"
+          value={newCategory}
+          onChange={(event) => setNewCategory(event.target.value)}
+        />
+        <button className="add-category-btn" onClick={handleAddWrapper}>
+          Add
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default Category
+
