@@ -1,8 +1,28 @@
-const handleDelete = (products, setProducts, index) => {
-  const newProducts = [...products];
-  newProducts.splice(index, 1);
-  setProducts(newProducts);
+const handleDelete = async (products, setProducts, index) => {
+  try {
+    const productId = products[index].id;
+    const response = await fetch(`${props.apiUrl}/${productId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Basic ${btoa(
+          `${props.apiKey}:${props.apiPassword}`
+        )}`,
+      },
+    });
+
+    if (response.ok) {
+      const newProducts = [...products];
+      newProducts.splice(index, 1);
+      setProducts(newProducts);
+    } else {
+      console.error("Failed to delete product");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
+
 
 const handleEdit = (products, setProducts, index, newName) => {
   const newProducts = [...products];

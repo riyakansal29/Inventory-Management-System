@@ -1,0 +1,6 @@
+1. update delete func in category page
+2. update edit,add func in product page
+3. create a seperate file for func in product page productfunc.js
+4. create a left-vertical panel to navigate between pages
+5. create a seperate file for the navbar and render it in all the pages
+6. remove the redundant code 
