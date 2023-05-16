@@ -5,10 +5,11 @@ SANITIZE THE CODE
 2. Nav bar - user icon on all pages
 3. vertical left nav panel for pages
 4. divide code in components
+5. Update the pagination system
+6. ADD CSS on diff comp
 PRODUCT page
-1. Pagination - more than 10 entries enter
 2. empty table values fill
-3. edit, delete, add functions implement on api call
+3. edit, add functions implement on api call
 4. search functionality build
 5. Filter based on category
 MISC
