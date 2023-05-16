@@ -1,6 +1,21 @@
-1. update all the func in category page
-2. update edit,add func in product page
-3. create a seperate file for func in product page productfunc.js
-4. create a left-vertical panel to navigate between pages
-5. create a seperate file for the navbar and render it in all the pages
-6. remove the redundant code 
+CATEGORY PAGE
+1. add,delete func on api
+SANITIZE THE CODE 
+1. Login Page
+2. Nav bar - user icon on all pages
+3. vertical left nav panel for pages
+4. divide code in components
+PRODUCT page
+1. Pagination - more than 10 entries enter
+2. empty table values fill
+3. edit, delete, add functions implement on api call
+4. search functionality build
+5. Filter based on category
+MISC
+1. Product Variation in add , table
+2. Login Page - database 
+DASHBOARD
+API DOCUMENTATION 
+https://stockmanagementlabs.github.io/atum-rest-api-docs/
+
+http://inventorymanagement.epizy.com/admin.php

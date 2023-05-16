@@ -16,12 +16,41 @@ const handleDelete = async (products, setProducts, index, props) => {
       newProducts.splice(index, 1);
       setProducts(newProducts);
     } else {
-      console.error("Failed to delete product");
+      console.error("Failed to delete category");
     }
   } catch (error) {
     console.error(error);
   }
 };
+
+const handleAdd = async (props, products, setProducts, newCategory, setNewCategory) => {
+  try {
+    const response = await fetch(`${props.apiUrl}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Basic ${btoa(
+          `${props.apiKey}:${props.apiPassword}`
+        )}`,
+      },
+      body: JSON.stringify({
+        name: newCategory,
+        slug: `${newCategory.toLowerCase().replace(/\s/g, "-")}`
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setProducts([...products, data]);
+      setNewCategory("");
+    } else {
+      console.error("Failed to add category");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 
 const handleEdit = async (props, products, setProducts, index, newName) => {
   try {
@@ -60,43 +89,16 @@ const handleCancelEdit = (setEditingIndex, setEditingValue) => {
   setEditingValue("");
 };
 
-const handleSaveEdit = (
+const handleSaveEdit = async (
   handleEdit,
   setEditingIndex,
   setEditingValue,
   index,
-  editingValue,
+  editingValue
 ) => {
-  handleEdit(index, editingValue);
+  await handleEdit(index, editingValue);
   setEditingIndex(-1);
   setEditingValue("");
-};
-
-const handleAdd = async (
-  props,
-  products,
-  setProducts,
-  newCategory,
-  setNewCategory,
-) => {
-  try {
-    const response = await fetch(props.apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Basic ${btoa(
-          `${props.apiKey}:${props.apiPassword}`
-        )}`,
-      },
-      body: JSON.stringify({ name: newCategory }),
-    });
-
-    const data = await response.json();
-    setProducts([...products, data]);
-    setNewCategory("");
-  } catch (error) {
-    console.error(error);
-  }
 };
 
 export {
