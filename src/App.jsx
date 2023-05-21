@@ -13,7 +13,9 @@ const App = () => {
       <div className="app-container">
         <Sidebar />
         <div className="content-container">
+
           <Navbar />
+          <div>
           <main>
             <Routes>
               <Route path="/" element={<Dashboard />} />
@@ -39,6 +41,7 @@ const App = () => {
               />
             </Routes>
           </main>
+          </div>
         </div>
       </div>
     </BrowserRouter>
