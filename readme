@@ -1,12 +1,8 @@
 CATEGORY PAGE
 1. add,delete func on api
 SANITIZE THE CODE 
-1. Login Page
-2. Nav bar - user icon on all pages
-3. vertical left nav panel for pages
-4. divide code in components
-5. Update the pagination system
-6. ADD CSS on diff comp
+5. Update the pagination system and display no. of pages
+6. ADD CSS on diff comp and make it responsive
 PRODUCT page
 2. empty table values fill
 3. edit, add functions implement on api call

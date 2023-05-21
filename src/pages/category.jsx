@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Logo from "/assets/logo.png";
 import {
   handleDelete,
   handleEdit,
@@ -90,15 +89,6 @@ function Category(props) {
 
   return (
     <div>
-      <div>
-        <nav className="navbar">
-          <div id="logo_box">
-            <img id="logo" src={Logo} alt="logo" />
-            <span id="logo_name">Riya Kansal</span>
-          </div>
-        </nav>
-        <div className="content"></div>
-      </div>
       <br />
       <table>
         <thead>
