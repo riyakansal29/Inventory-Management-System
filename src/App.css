@@ -3,90 +3,361 @@ body {
   padding: 0;
 }
 
-.app-container {
+/* SIDEBAR */
+.sidebar {
+  background-color: #121935;
+  width: 250px;
+}
+
+.inventory-box {
+  background-color: #1B2346;
+  padding: 11.5px;
+  display: flex;
+}
+
+.logo-text {
+  color: white;
+  font-size: 19px;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-bottom: 0;
+}
+
+#inventory {
+  margin-left: 15px;
+}
+
+.outer-sidebar {
+  list-style-type: none;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.sidebar-innersubmenu li:before {
+  content: "";
+  z-index: 1;
+  border: 1px dotted #d7d7d7;
+  border-width: 0 0 0 1px;
+}
+
+li,
+.sidebar-submenu {
+  margin-bottom: 10px;
+}
+
+li a,
+.sidebar-submenu {
+  color: #b8b9cb;
+  text-decoration: none;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+li a span,
+.sidebar-submenu span {
+  margin-left: 10px;
+}
+
+li a i,
+.sidebar-submenu i {
+  color: #b8b9cb;
+  margin-right: 10px;
+}
+
+li a:hover,
+.sidebar-submenu:hover {
+  background-color: #232c51;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 0;
+}
+
+li a:hover span,
+.sidebar-submenu:hover span {
+  color: #2440b1;
+}
+
+.sidebar-innersubmenu li:hover {
+  background-color: #232c51;
+  border-radius: 4px;
+  text-decoration: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.sidebar-container {
   display: flex;
   min-height: 100vh;
 }
 
-.sidebar {
-  background-color: #f2f2f2;
-  width: 200px;
-  padding: 20px;
+li a:active,
+li a:focus,
+.sidebar-submenu:active,
+.sidebar-submenu:hover {
+  text-decoration: none;
+  color: #b8b9cb;
 }
 
-.content-container {
-  flex: 1;
-  padding:2px;
+.sidebar-innersubmenu {
+  margin-left: 25px;
+  padding-left: 0;
+  list-style-type: none;
+  margin-top: 10px;
+}
+
+.sidebar-submenu {
+  cursor: pointer;
+}
+
+.sidebar-innersubmenu li {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-innersubmenu li:before {
+  background-color: #b8b9cb;
+  margin-right: 10px;
+}
+
+.sidebar-innersubmenu li a {
+  display: flex;
+  align-items: center;
+  color: #b8b9cb;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.sidebar-innersubmenu li a:hover {
+  color: #2440b1;
+}
+
+.sidebar-innersubmenu li a i {
+  margin-right: 5px;
+}
+
+/* NAVBAR */
+.dropdown {
+  position: relative;
+  display: inline-block;
 }
 
 .navbar {
-  background-color: #edebeb;
-  padding: 2px;
+  background-color: #FFFFFF;
+  padding: 1px;
+  padding-bottom: 0px;
+  margin: 0px;
   display: flex;
   justify-content: flex-end;
+  border-bottom: 0.5px solid #d7d7d7;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #FFFFFF;
+  color: #333;
+  border: 0.5px solid #d7d7d7;
+  margin: 0 5px 5px 2px;
+  cursor: pointer;
+  border-radius: 30px;
+  padding: 0px 16px 0px;
+  position: relative; /* Added */
+  z-index: 1;
+}
+
+.dropdown-menu {
+  color: #333;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  max-width: 250px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border: 0.5px solid #d7d7d7;
+  border-radius: 5px;
+  padding: 8px;
+  margin-top: 5px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
 
 #logo {
-  height: 50px;
+  height: 34px;
+  width: 20px;
   align-items: right;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 
 #logo_name {
-  margin: 10px;
+  margin: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#logout_button {
+  padding: 5px 10px;
+  border: 0px;
+  background-color: white;
+}
+
+.dropdown li {
+  list-style: none;
+  padding: 5px 10px;
+}
+
+.navbar-container {
+  flex: 1;
+  padding: 2px;
+}
+
+#off {
+  color: black;
+}
+
+/* TABLE */
+.panel {
+  width: 90%;
+  margin: auto;
+  border: 0.5px solid #ececec;
+  border-radius: 0%;
+  padding: 0px;
+}
+
+#margin-product {
+  width: 70%;
+  margin: auto;
+  margin-left: 10px;
+  border: 0.5px solid #ececec;
+  border-radius: 0%;
+  padding: 0px;
+}
+
+#panel-head {
+  background-color: #f8f7fa;
+}
+
+#panel-margin {
+  margin-left: 23px;
+}
+
+.panel-heading {
+  padding: 10px;
+  color: #FFFFFF;
+  font-size: 18px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 0px;
+  margin: 0px;
+}
+
+#pagination-product {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.pagination-btn {
+  background-color: #4363e5;
+  color: white;
+  border: white;
+  border-radius: 10%;
+  margin: 2px;
+  margin-bottom: 0px;
+  padding: 2px;
+  height: auto;
+  width: 80px;
+  font-size: 16px;
+  &.disabled {
+    background-color: gray;
+    cursor: not-allowed;
+  }
 }
 
 table {
   border-collapse: collapse;
-  width: 80%;
-  text-align: center;
-  margin: 0 auto;
+  width: 100%;
+}
+
+tr {
+  border-bottom: 1px solid #f1edf4;
+}
+
+tr:hover {
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+#head-row {
+  box-shadow: none;
+}
+
+#head-row th {
+  font-size: 16px;
 }
 
 th,
 td {
-  border: 1px solid black;
-  text-align: left;
-  padding: 8px;
-  color: black;
-}
-
-th {
-  background-color: #4caf50;
-  color: white;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.addcategory {
   text-align: center;
+  padding: 10px;
+  color: #515365;
+  font-size: 15px;
 }
 
-.add-category-input {
-  padding: 4px;
-  border: 1px solid #191818;
-  border-radius: 4px;
-  font-size: 16px;
-  margin-right: 8px;
+.action-button {
+  background-color: #6EA7DD;
+  border: white;
+  margin: 3px;
 }
 
-.add-category-btn {
-  padding: 4px 4px;
-  background-color: rgb(132, 132, 245);
+.edit-button {
+  background-color: #6EA7DD;
+  border: white;
+  margin: 3px;
+}
+
+.glyphicon {
   color: white;
-  border: 1px solid #191818;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  margin: 2px;
 }
 
-.add-category-btn:hover {
-  background-color: red;
+.glyphicon-th {
+  color: #0b0217;
 }
 
 table img {
   width: 50px;
   height: 50px;
+}
+
+.addfunc {
+  padding: 0px;
+  width: 50%;
+  margin-top: 20px;
+}
+
+.addcategory {
+  margin: 10px;
+  padding: 10px;
+}
+
+#manageproduct {
+  display: flex;
+}
+
+#search-product {
+  padding: 0px;
+  width: 40%;
+  margin-left: 10px;
+  margin-top: 0px;
+  margin-right: 10px;
 }

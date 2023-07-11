@@ -23,35 +23,6 @@ const handleDelete = async (products, setProducts, index, props) => {
   }
 };
 
-const handleAdd = async (props, products, setProducts, newCategory, setNewCategory) => {
-  try {
-    const response = await fetch(`${props.apiUrl}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Basic ${btoa(
-          `${props.apiKey}:${props.apiPassword}`
-        )}`,
-      },
-      body: JSON.stringify({
-        name: newCategory,
-        slug: `${newCategory.toLowerCase().replace(/\s/g, "-")}`
-      }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      setProducts([...products, data]);
-      setNewCategory("");
-    } else {
-      console.error("Failed to add category");
-    }
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-
 const handleEdit = async (props, products, setProducts, index, newName) => {
   try {
     const productId = products[index].id;
@@ -107,5 +78,4 @@ export {
   handleStartEdit,
   handleCancelEdit,
   handleSaveEdit,
-  handleAdd,
 };
