@@ -14,7 +14,7 @@ The website leverages the ATUM REST API to access WordPress data, enabling conve
 # Purpose of the project
 Inventory management is a crucial aspect of any business affecting operations, finances, and customer satisfaction. My system directly addresses this crucial need, providing a comprehensive solution for businesses to manage their inventory efficiently.
 
-# The website consiste a Api.js file you can update your Woocommerce/ ATUM API and password in this file and enjoy working on it.
+**** The website consiste a Api.js file you can update your Woocommerce/ ATUM API and password in this file and enjoy working on it. ****
 
-# Would love to hear about any changes I could make and would love to collaborate in this project.
+**** Would love to hear about any changes I could make and would love to collaborate in this project. ****
 
