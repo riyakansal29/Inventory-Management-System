@@ -18,3 +18,9 @@ Inventory management is a crucial aspect of any business affecting operations, f
 
 **** Would love to hear about any changes I could make and would love to collaborate in this project. ****
 
+Use :
+"npm install" to install all the dependencies
+"npm run dev" to run the project in visual studio code
+
+
+
